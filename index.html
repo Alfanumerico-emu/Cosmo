@@ -4,14 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Molo Magallanes | Cosmogonía</title>
-  <!-- Tipografía Profesional -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
   
   <style>
     /* Variables de Color y Estilos Base */
     :root {
-      --bg-color: #050505;
-      --card-bg: #111111;
+      --bg-color: #030303;
+      --card-bg: rgba(17, 17, 17, 0.85); /* Sutil transparencia para integrar el fondo animado */
       --primary: #FFC513; /* Amarillo Cosmogonía */
       --text-main: #FFFFFF;
       --text-muted: #A0A0A0;
@@ -33,21 +32,88 @@
       min-height: 100vh;
       color: var(--text-main);
       padding: 20px;
+      overflow-x: hidden;
     }
 
-    /* Contenedor Principal Móvil (Estructura Card) */
+    /* CONTENEDOR DEL FONDO ANIMADO CÓSMICO */
+    .bg-universe {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #020202 100%);
+    }
+
+    /* Esferas de luz flotantes (Glow Blobs) */
+    .glow-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.6;
+      animation: floatUniverse 25s infinite alternate ease-in-out;
+    }
+
+    .blob-1 {
+      width: 450px;
+      height: 450px;
+      top: -100px;
+      left: -150px;
+      background: radial-gradient(circle, rgba(255, 197, 19, 0.12) 0%, rgba(255, 197, 19, 0) 70%);
+      animation-duration: 28s;
+    }
+
+    .blob-2 {
+      width: 550px;
+      height: 550px;
+      bottom: -150px;
+      right: -150px;
+      background: radial-gradient(circle, rgba(255, 197, 19, 0.08) 0%, rgba(255, 197, 19, 0) 70%);
+      animation-duration: 35s;
+      animation-delay: -7s;
+    }
+
+    .blob-3 {
+      width: 350px;
+      height: 350px;
+      top: 30%;
+      right: 15%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0) 70%);
+      animation-duration: 22s;
+      animation-delay: -12s;
+    }
+
+    /* Animación orgánica de movimiento universal */
+    @keyframes floatUniverse {
+      0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+      }
+      50% {
+        transform: translate(60px, 40px) scale(1.15) rotate(180deg);
+      }
+      100% {
+        transform: translate(-30px, -50px) scale(0.9) rotate(360deg);
+      }
+    }
+
+    /* Contenedor Principal Tarjeta NFC */
     .nfc-card {
       width: 100%;
       max-width: 420px;
       background-color: var(--card-bg);
       border-radius: var(--border-radius);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.9);
       overflow: hidden;
       position: relative;
       padding-bottom: 40px;
+      backdrop-filter: blur(10px); /* Efecto vidrio esmerilado sobre el fondo animado */
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    /* Cabecera / Banner (Uso de Molo-1.jpg) */
+    /* Cabecera / Banner (Molo-1.jpg) */
     .card-header {
       width: 100%;
       height: 150px;
@@ -65,13 +131,13 @@
       background: linear-gradient(to bottom, rgba(17,17,17,0) 0%, rgba(17,17,17,1) 100%);
     }
 
-    /* Foto de Perfil (Uso de Sobre-nosotros.png) */
+    /* Foto de Perfil (Sobre-nosotros.png) */
     .profile-pic {
       width: 130px;
       height: 130px;
       border-radius: 50%;
       object-fit: cover;
-      border: 4px solid var(--card-bg);
+      border: 4px solid #111;
       margin: -65px auto 0;
       display: block;
       position: relative;
@@ -79,16 +145,15 @@
       background-color: var(--primary);
     }
 
-    /* Logotipo (Uso de COSMO_TRANSPARENCIA_FONDOBLANCO-1.png) */
+    /* Logotipo (COSMO_TRANSPARENCIA_FONDOBLANCO-1.png) */
     .brand-logo {
       width: 220px;
       display: block;
       margin: 20px auto 5px;
-      /* Fuerza el logo a color blanco para alto contraste en fondo oscuro */
       filter: brightness(0) invert(1);
     }
 
-    /* Textos (Nombre y Puesto) */
+    /* Textos */
     .name {
       text-align: center;
       font-weight: 900;
@@ -120,7 +185,7 @@
     .action-btn {
       display: flex;
       align-items: center;
-      background-color: #1e1e1e;
+      background-color: rgba(30, 30, 30, 0.7);
       color: var(--text-main);
       text-decoration: none;
       padding: 16px 20px;
@@ -128,7 +193,7 @@
       font-weight: 600;
       font-size: 15px;
       transition: all 0.3s ease;
-      border: 1px solid #2a2a2a;
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .action-btn:hover, .action-btn:active {
@@ -169,14 +234,14 @@
     .social-btn {
       width: 45px;
       height: 45px;
-      background-color: #1e1e1e;
+      background-color: rgba(30, 30, 30, 0.7);
       border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
       text-decoration: none;
       transition: all 0.3s ease;
-      border: 1px solid #2a2a2a;
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .social-btn:hover, .social-btn:active {
@@ -199,27 +264,27 @@
 </head>
 <body>
 
+  <div class="bg-universe">
+    <div class="glow-blob blob-1"></div>
+    <div class="glow-blob blob-2"></div>
+    <div class="glow-blob blob-3"></div>
+  </div>
+
   <div class="nfc-card">
     
-    <!-- Banner superior JPG/GIF -->
     <div class="card-header"></div>
     
-    <!-- Foto de Perfil circular -->
     <img src="Sobre-nosotros.png" alt="Perfil Molo Magallanes" class="profile-pic">
     
-    <!-- Logo de Cosmogonía -->
     <img src="COSMO_TRANSPARENCIA_FONDOBLANCO-1.png" alt="Cosmogonía" class="brand-logo">
 
-    <!-- Nombre y Puesto -->
     <h1 class="name">Molo Magallanes</h1>
     <h2 class="role">Gestión y Crecimiento de Marcas</h2>
 
-    <!-- Botones de Contacto (Extraídos del sitio web) -->
     <div class="buttons-container">
       
       <a href="https://wa.me/523331286455" class="action-btn" target="_blank">
         <div class="icon">
-          <!-- SVG Sólido WhatsApp -->
           <svg viewBox="0 0 24 24"><path d="M12.031 21c-1.63 0-3.193-.418-4.577-1.21l-5.116 1.341 1.365-4.992A9.957 9.957 0 012.04 11.03C2.04 5.498 6.536 1 12.064 1S22.09 5.498 22.09 11.03c0 5.531-4.496 10.027-10.059 10.027v-.057zm-4.78-2.613l.317.188A8.04 8.04 0 0012.03 20c4.437 0 8.04-3.604 8.04-8.04s-3.603-8.04-8.04-8.04S3.99 7.525 3.99 11.962c0 1.488.406 2.923 1.173 4.19l.206.33-1.05 3.834 3.932-1.038v.109zm8.563-5.263c-.156-.079-2.385-1.177-2.753-1.312-.367-.136-.635-.203-.903.204-.268.406-1.036 1.311-1.27 1.58-.235.269-.47.304-.939.068-3.08-1.545-4.44-3.836-5.275-5.275-.235-.407.234-.373.903-1.71.079-.157.039-.294-.02-.452-.059-.157-.903-2.176-1.237-2.98-.323-.78-.65-.675-.903-.687-.234-.011-.502-.011-.77-.011-.268 0-.703.102-1.07.509-.368.407-1.405 1.374-1.405 3.35 0 1.977 1.439 3.886 1.64 4.157.201.272 2.835 4.331 6.866 6.074.96.414 1.71.662 2.296.848.964.306 1.84.262 2.531.159.773-.116 2.385-.975 2.72-1.916.334-.941.334-1.747.234-1.916-.1-.17-.367-.272-.836-.506z"/></svg>
         </div>
         Enviar WhatsApp
@@ -227,7 +292,6 @@
 
       <a href="tel:+523331286455" class="action-btn">
         <div class="icon">
-          <!-- SVG Sólido Teléfono -->
           <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
         </div>
         Llamar a la oficina
@@ -235,7 +299,6 @@
 
       <a href="mailto:bernardo@cosmogonia.com.mx" class="action-btn">
         <div class="icon">
-          <!-- SVG Sólido Correo -->
           <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
         </div>
         Enviar Correo
@@ -243,7 +306,6 @@
 
       <a href="https://maps.google.com/?q=Calle+Homero+86+Vallarta+San+Jorge+Guadalajara" class="action-btn" target="_blank">
         <div class="icon">
-          <!-- SVG Sólido Ubicación -->
           <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
         </div>
         Ubicación Oficina
@@ -251,21 +313,17 @@
 
       <a href="https://www.cosmogonia.com.mx/" class="action-btn" target="_blank">
         <div class="icon">
-          <!-- SVG Sólido Sitio Web -->
           <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
         </div>
         Visitar Sitio Web
       </a>
     </div>
 
-    <!-- Redes Sociales -->
     <div class="social-row">
       <a href="https://www.facebook.com/CosmogoniaMX" class="social-btn" target="_blank" aria-label="Facebook">
-        <!-- SVG Facebook -->
         <svg viewBox="0 0 24 24"><path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.593 1.323-1.325V1.325C24 .593 23.407 0 22.675 0z"/></svg>
       </a>
       <a href="https://www.instagram.com/cosmogoniamx/" class="social-btn" target="_blank" aria-label="Instagram">
-        <!-- SVG Instagram -->
         <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm3.975-11.455a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/></svg>
       </a>
     </div>
