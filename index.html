@@ -9,9 +9,8 @@
   <style>
     /* Variables de Color y Estilos Base */
     :root {
-      --bg-color: #030303;
-      --card-bg: rgba(17, 17, 17, 0.85); /* Sutil transparencia para integrar el fondo animado */
-      --primary: #FFC513; /* Amarillo Cosmogonía */
+      --card-bg: #111111; /* Fondo sólido para la tarjeta (garantiza legibilidad absoluta) */
+      --primary: #FFC513;  /* Amarillo Cosmogonía */
       --text-main: #FFFFFF;
       --text-muted: #A0A0A0;
       --border-radius: 20px;
@@ -24,7 +23,7 @@
     }
     
     body {
-      background-color: var(--bg-color);
+      margin: 0;
       font-family: 'Montserrat', sans-serif;
       display: flex;
       justify-content: center;
@@ -32,69 +31,49 @@
       min-height: 100vh;
       color: var(--text-main);
       padding: 20px;
-      overflow-x: hidden;
+      position: relative;
     }
 
-    /* CONTENEDOR DEL FONDO ANIMADO CÓSMICO */
-    .bg-universe {
+    /* CONTENEDOR DEL FONDO ANIMADO DE FILAS */
+    .bg-animated-rows {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%;
+      height: 100vh;
       z-index: -1;
       overflow: hidden;
-      background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #020202 100%);
     }
 
-    /* Esferas de luz flotantes (Glow Blobs) */
-    .glow-blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.6;
-      animation: floatUniverse 25s infinite alternate ease-in-out;
+    .row {
+      height: 10vh;
+      width: 100%;
+      animation: fade 6s infinite ease-in-out;
+      animation-direction: alternate;
     }
 
-    .blob-1 {
-      width: 450px;
-      height: 450px;
-      top: -100px;
-      left: -150px;
-      background: radial-gradient(circle, rgba(255, 197, 19, 0.12) 0%, rgba(255, 197, 19, 0) 70%);
-      animation-duration: 28s;
-    }
+    /* Retrasos secuenciales para generar el efecto ola */
+    .row-1  { animation-delay: 0s; }
+    .row-2  { animation-delay: 0.5s; }
+    .row-3  { animation-delay: 1s; }
+    .row-4  { animation-delay: 1.5s; }
+    .row-5  { animation-delay: 2s; }
+    .row-6  { animation-delay: 2.5s; }
+    .row-7  { animation-delay: 3s; }
+    .row-8  { animation-delay: 3.5s; }
+    .row-9  { animation-delay: 4s; }
+    .row-10 { animation-delay: 4.5s; }
 
-    .blob-2 {
-      width: 550px;
-      height: 550px;
-      bottom: -150px;
-      right: -150px;
-      background: radial-gradient(circle, rgba(255, 197, 19, 0.08) 0%, rgba(255, 197, 19, 0) 70%);
-      animation-duration: 35s;
-      animation-delay: -7s;
-    }
-
-    .blob-3 {
-      width: 350px;
-      height: 350px;
-      top: 30%;
-      right: 15%;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0) 70%);
-      animation-duration: 22s;
-      animation-delay: -12s;
-    }
-
-    /* Animación orgánica de movimiento universal */
-    @keyframes floatUniverse {
+    /* ANIMACIÓN: De Amarillo de marca -> Escala de Grises -> Negro Profundo */
+    @keyframes fade {
       0% {
-        transform: translate(0, 0) scale(1) rotate(0deg);
+        background-color: #FFC513; /* Amarillo oficial */
       }
-      50% {
-        transform: translate(60px, 40px) scale(1.15) rotate(180deg);
+      55% {
+        background-color: #444444; /* Escala de grises (Gris medio) */
       }
       100% {
-        transform: translate(-30px, -50px) scale(0.9) rotate(360deg);
+        background-color: #050505; /* Negro absoluto */
       }
     }
 
@@ -104,13 +83,11 @@
       max-width: 420px;
       background-color: var(--card-bg);
       border-radius: var(--border-radius);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
       overflow: hidden;
       position: relative;
       padding-bottom: 40px;
-      backdrop-filter: blur(10px); /* Efecto vidrio esmerilado sobre el fondo animado */
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     /* Cabecera / Banner (Molo-1.jpg) */
@@ -137,7 +114,7 @@
       height: 130px;
       border-radius: 50%;
       object-fit: cover;
-      border: 4px solid #111;
+      border: 4px solid var(--card-bg);
       margin: -65px auto 0;
       display: block;
       position: relative;
@@ -185,7 +162,7 @@
     .action-btn {
       display: flex;
       align-items: center;
-      background-color: rgba(30, 30, 30, 0.7);
+      background-color: #1a1a1a;
       color: var(--text-main);
       text-decoration: none;
       padding: 16px 20px;
@@ -193,7 +170,7 @@
       font-weight: 600;
       font-size: 15px;
       transition: all 0.3s ease;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid #262626;
     }
 
     .action-btn:hover, .action-btn:active {
@@ -234,14 +211,14 @@
     .social-btn {
       width: 45px;
       height: 45px;
-      background-color: rgba(30, 30, 30, 0.7);
+      background-color: #1a1a1a;
       border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
       text-decoration: none;
       transition: all 0.3s ease;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid #262626;
     }
 
     .social-btn:hover, .social-btn:active {
@@ -264,10 +241,17 @@
 </head>
 <body>
 
-  <div class="bg-universe">
-    <div class="glow-blob blob-1"></div>
-    <div class="glow-blob blob-2"></div>
-    <div class="glow-blob blob-3"></div>
+  <div class="bg-animated-rows">
+    <div class="row row-1"></div>
+    <div class="row row-2"></div>
+    <div class="row row-3"></div>
+    <div class="row row-4"></div>
+    <div class="row row-5"></div>
+    <div class="row row-6"></div>
+    <div class="row row-7"></div>
+    <div class="row row-8"></div>
+    <div class="row row-9"></div>
+    <div class="row row-10"></div>
   </div>
 
   <div class="nfc-card">
